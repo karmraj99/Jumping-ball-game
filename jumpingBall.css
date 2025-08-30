@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: black;
+}
+
+.soundButton{
+    background-color: black;
+    padding: 2px;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.box{
+    position: relative;
+    background-image: url("image/background.gif");
+    background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+    width: 100%;
+    max-width: 1000px;
+    height: 90vh;
+    border: 2px solid white;
+}
+
+.ball{
+    width: 3%;
+    aspect-ratio: 1/1;
+    position: relative;
+}
+
+.playingBar{
+     background-image: url("image/skateboard.png");
+    background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+    width: 8vw;
+    aspect-ratio: 1/0.5;
+    position: absolute;
+    top: 88%;
+    left: 0;
+    transform: translateX(-50%);
+}
+
+.newBlock{
+    aspect-ratio: 1/0.5;
+}
+
+.scoreScreen{
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    display: none;
+
+}
+
+.score{
+    border: 2px rgb(180, 177, 177) solid;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.gameOver{
+    font-size: x-large;
+    font-weight: 900;
+    text-transform: capitalize;
+    color: aliceblue;
+}
+
+.totalScore{
+    text-transform: capitalize;
+    color: aliceblue;
+}
+
+.play{
+    margin-top: 10px;
+    padding: 10px;
+    text-transform: capitalize;
+    border-radius: 15px;
+    font-weight: 600;
+}
