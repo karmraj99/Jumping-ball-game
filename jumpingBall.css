@@ -104,3 +104,37 @@ body{
     border-radius: 15px;
     font-weight: 600;
 }
+
+.control {
+  display: none;
+}
+
+@media (max-width: 768px){
+    .box{
+    width: 100%;
+    max-width: 1000px;
+    height: 70vh;
+    border: 2px solid white;
+    }
+
+    .control{
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    justify-content: space-between;
+    }
+
+    .controlButton{
+    background: transparent;
+    }
+
+    .controlButtonImage{
+    width: 50px;
+    aspect-ratio: 1/0.5;
+    }
+}
+

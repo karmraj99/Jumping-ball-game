@@ -6,6 +6,8 @@ const play = document.querySelector(`.play`);
 const totalScore = document.querySelector(`.totalScore`);
 const soundButton = document.querySelector(".soundButton");
 const soundImg = document.querySelector(`.soundImg`);
+const leftButton = document.querySelector(`#leftButton`);
+const rightButton = document.querySelector(`#rightButton`);
 
 let soundOnOff = true;
 
@@ -174,35 +176,40 @@ window.addEventListener(`keydown`, (event)=>{
   }
 });
 
-// screen touch
-let touchStartX = 0;
-let barStartX = 0;
-        
-playingBar.addEventListener("touchstart", (e) => {
-  let touch = e.touches[0];
-  touchStartX = touch.clientX;
-  barStartX = parseInt(playingBar.style.left) || (box.clientWidth - playingBar.offsetWidth) / 2;
-            
+let moveInterval;
+
+// move function
+function moveBar(direction) {
+  playingBarPosition = playingBar.getBoundingClientRect();
+  currentLeft = playingBar.offsetLeft;
+
   if (!gameOnOff) {
     gameOnOff = true;
     ballMoving();
-    }
-  });
+  }
 
-playingBar.addEventListener("touchmove", (e) => {
-  let touch = e.touches[0];
-  let deltaX = touch.clientX - touchStartX;
-  let newLeft = barStartX + deltaX;
+  if (direction === "left" && playingBarPosition.left - 10 > boxPosition.left) {
+    playingBar.style.left = currentLeft - 10 + "px";
+  }
 
-            // keep paddle inside box
-  if (newLeft < 0) newLeft = 0;
-  if (newLeft + playingBar.offsetWidth > box.clientWidth) {
-    newLeft = box.clientWidth - playingBar.offsetWidth;
-    }
+  if (direction === "right" && playingBarPosition.right + 10 < boxPosition.right) {
+    playingBar.style.left = currentLeft + 10 + "px";
+  }
+}
 
-  playingBar.style.left = newLeft + "px";
-            playingBarPosition = playingBar.getBoundingClientRect();
+// left button hold
+leftButton.addEventListener("mousedown", () => {
+  moveInterval = setInterval(() => moveBar("left"), 50);
 });
+leftButton.addEventListener("mouseup", () => clearInterval(moveInterval));
+leftButton.addEventListener("mouseleave", () => clearInterval(moveInterval));
+
+// right button hold
+rightButton.addEventListener("mousedown", () => {
+  moveInterval = setInterval(() => moveBar("right"), 50);
+});
+rightButton.addEventListener("mouseup", () => clearInterval(moveInterval));
+rightButton.addEventListener("mouseleave", () => clearInterval(moveInterval));
 
 
 // collision detection and reflection after collision
@@ -300,6 +307,7 @@ function addNewBall(parentBallPositionX,parentBallPositionY){
   addBall.style.top = parentBallPositionY + "px";
 }
 
+//adding sound effect
 soundButton.addEventListener("click", () => {
     if(soundOnOff){
       soundOnOff = false;
