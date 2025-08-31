@@ -197,19 +197,32 @@ function moveBar(direction) {
   }
 }
 
-// left button hold
-leftButton.addEventListener("mousedown", () => {
-  moveInterval = setInterval(() => moveBar("left"), 50);
-});
-leftButton.addEventListener("mouseup", () => clearInterval(moveInterval));
-leftButton.addEventListener("mouseleave", () => clearInterval(moveInterval));
+// helper
+function startMove(direction) {
+  clearInterval(moveInterval); // avoid duplicates
+  moveInterval = setInterval(() => moveBar(direction), 50);
+}
 
-// right button hold
-rightButton.addEventListener("mousedown", () => {
-  moveInterval = setInterval(() => moveBar("right"), 50);
+function stopMove() {
+  clearInterval(moveInterval);
+}
+
+// left button (mobile only)
+leftButton.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // stop page scrolling
+  startMove("left");
 });
-rightButton.addEventListener("mouseup", () => clearInterval(moveInterval));
-rightButton.addEventListener("mouseleave", () => clearInterval(moveInterval));
+leftButton.addEventListener("touchend", stopMove);
+leftButton.addEventListener("touchcancel", stopMove);
+
+// right button (mobile only)
+rightButton.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  startMove("right");
+});
+rightButton.addEventListener("touchend", stopMove);
+rightButton.addEventListener("touchcancel", stopMove);
+
 
 
 // collision detection and reflection after collision
