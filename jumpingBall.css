@@ -111,6 +111,8 @@ body{
 
 @media (max-width: 768px){
     .box{
+    position: relative;
+    top: -30px;
     width: 100%;
     max-width: 1000px;
     height: 70vh;
